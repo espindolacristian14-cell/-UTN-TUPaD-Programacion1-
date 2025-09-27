@@ -1,0 +1,111 @@
+#parciala - programacion 1
+#Enunciado La biblioteca escolar necesita un sistema de gestión sencillo para su catálogo de libros y las copias disponibles. Se pide desarrollar un programa con una interfaz basada en menú que utilice listas paralelas (una para titulos[] y otra para ejemplares[]). Cada título debe estar vinculado a su número correspondiente de copias utilizando el mismo índice en ambas listas. Se debe utilizar un bucle while para navegar por las opciones del menú hasta que el usuario elija salir.
+def mostrar_menu ():
+    print ("/n MENU BIBLIOTECA")
+    print("ingresar titulo")
+    print("ingresar ejemplares")
+    print("mostrar catalogos")
+    print("disponibilidad")
+    print("agotados")
+    print("agregar titulo")
+    print("actualizar ejemplares (prestamos/devolucion)")
+    print("salir")
+
+titulos=[]
+ejemplares= []
+
+opcion= 0
+while opcion != 8:
+    mostrar_menu()
+    try:
+        opcion= int(input("selecionar opcion:"))
+    except ValueError:
+        print ("opcion invalidad, ingrese un numero.")
+        continue
+
+#ingresar titulos
+if opcion == 1:
+    n= int(input("seleccione una opcion"))
+    for i in range(n):
+        titulo= input(f"ingrese el titulo {i+1}:"). strip()
+        if titulo != "":
+            titulos.append(titulo)
+        else:
+            titulos.append("titulo sin nombre")
+        print ("titulos cargados correctamente.")
+
+#ingresar ejemplares
+elif opcion == 2:
+    if len (titulos) == 0:
+        print("primero debe ingresar titulos.")
+    else:
+        for i in range(len(titulos)):
+            cant= int(input(f"ingrese la cantidad de ejemplares de {titulos[i]}:"))
+            ejemplares.append(cant)
+        print("ejemplares cargados correctamente.")
+
+#mostar catalogos
+if opcion == 3:
+    if len(titulos) == 0:
+        print ("no hay libros cargados.")
+    else:
+        print ("n/ catalogos ")
+        for i in range(len(titulos)):
+            print(f"{titulos[i]} - {[ejemplares]} ejemplares")
+
+#consultar disponibilidad
+elif opcion == 4:
+    titulo_buscar= input("ingrese el nuevo titulo a buscar:").strip()
+    if titulo_buscar in titulos:
+        idx= titulos.index(titulo_buscar)
+        print(f"{titulos[idx]} tiene {ejemplares[idx]} ejemplares disponible.")
+    else:
+        print("el titulo no exite en el catalogo.")
+
+#listar agotados
+elif opcion == 5:
+    print("/n libros agotados.")
+    agotados= False
+    for i in range(len(titulos)):
+        if ejemplares[i] == 0:
+            print(titulos[i])
+            agotados= True
+    if not agotados:
+        print("no hay libros agotados.")
+
+#agregar titulo
+elif opcion == 6:
+    titulo_nuevo= input("ingrese el nuevo titulo:").strip()
+    if titulo_nuevo in titulos:
+        print("el titulo ya existe en el catalogo.")
+    else:
+        titulos.append(titulo_nuevo)
+        cant= int(input("ingrese la cantidad de ejemplares:"))
+        ejemplares.append(cant)
+        print("titulo agregado correctamente.")
+
+#actualizar ejemplar (prestamos/devolucion)
+elif opcion == 7:
+    titulo_buscar= int(input("ingrese el titulo a actualizar")).__strip()
+    if titulo_buscar in titulos:
+        idx= titulos.index(titulo_buscar)
+        accion=input("prestamo (P) o devolucion (D)").upper()
+        if accion == "P":
+            if ejemplares[idx] > 0:
+                ejemplares[idx] -= 0
+                print("prestamo realizado. ejemplares restantes:", ejemplares[idx])
+            else:
+                print("no hay ejemplares disponibles para prestamos")
+        elif accion == "D":
+            ejemplares[idx] += 1
+            print("devolucion realizadas. ejemplares disponibles:", ejemplares[idx])
+        else:
+            print("accion invalida.")
+    else:
+        print("el titulo no existe en el catalago.")
+
+#salir
+elif opcion == 8:
+    print("saliendo del sistema..")
+else:
+    print("opcion no validad, intente de nuevo.")
