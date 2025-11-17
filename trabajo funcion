@@ -1,0 +1,110 @@
+#actividad1
+def imprimir_hola_mundo():
+    "imprime '¡hola, mundo!' en la consola"
+    print("¡hola, mundo!")
+imprimir_hola_mundo()
+
+#actividad2
+def saludar(cristian):
+    return "hola" + cristian + "!"
+print(saludar(" cristian"))
+
+nombre_usuario= input("por favor, ingresa tu nombre: ")
+saludo= saludar(nombre_usuario)
+print(saludo)
+
+#actividad3
+def informacion_personal(nombre, apellido, edad, residencia):
+    "recibe nombre, apellido, edad y residencia, y devuelve una frase con esa información"
+    mensaje= (f"soy {nombre} {apellido} y tengo {edad} años y vivo en: {residencia}")
+    print(mensaje)
+nombre= input("ingresa tu nombre: ")
+apellido= input("ingresa tu apellido: ")
+edad= input("ingresa tu edad: ")
+residencia= input("ingresa tu lugar de residencia: ")
+informacion_personal(nombre, apellido, edad, residencia)
+
+#actividad4
+import math
+def calcular_area_circulo(radio):
+    "calcula el área de un círculo dado su radio"
+    area= math.pi * radio ** 2
+    return area
+def calcular_perimetro_circulo(radio):
+    "calcula el perímetro de un círculo dado su radio"
+    perimetro= 2 * math.pi * radio
+    return perimetro
+radio_puesto= float(input("ingresa el radio del círculo: "))
+area_circulo= calcular_area_circulo(radio_puesto)
+perimetro_circulo= calcular_perimetro_circulo(radio_puesto)
+print(f"el área del círculo es: {area_circulo}")
+print(f"el perímetro del círculo es: {perimetro_circulo}")
+
+#actividad5
+def segundos_a_horas(segundos):
+    "recibe segundos y devuelve la cantidad de horas."
+    horas= segundos / 3600
+    return horas
+segundos_ingresados= int(input("ingresa la cantidad de segundos: "))
+horas_convertidas= segundos_a_horas(segundos_ingresados)
+print(f"{segundos_ingresados} segundos son {horas_convertidas} horas.")
+
+#actividad6
+def tabla_multiplicar(numero):
+    "imprime la tabla de multiplicar del número dado del 1 al 10"
+    print(f"tabla de multiplicar del {numero}:")
+    for i in range(1, 11):
+        resultado= numero * i
+        print(f"{numero} x {i} = {resultado}")
+    print("tabla de multiplicar")
+    num= int(input("ingresa un número para ver su tabla de multiplicar: "))
+    tabla_multiplicar(num)
+
+#actividad7
+def operaciones_basicas(a, b):
+    "realiza y devuelve la suma, resta, multiplicación y división de dos números"
+    suma= a + b
+    resta= a - b
+    multiplicacion= a * b
+    division= a / b if b != 0 else "indefinida (no se puede dividir por cero)"
+    return suma, resta, multiplicacion, division
+print("operaciones básicas entre dos números")
+num1= float(input("ingresa el primer número (a): "))
+num2= float(input("ingresa el segundo número (b): "))
+resultados= operaciones_basicas(num1, num2)
+suma, resta, multiplicacion, division= resultados
+print("/nresultados:")
+print(f"suma: {num1} + {num2} = {suma}")
+print(f"resta: {num1} - {num2} = {resta}")
+print(f"multiplicación: {num1} * {num2} = {multiplicacion}")
+print(f"división: {num1} / {num2} = {division}")
+
+#actividad8
+def calcular_imc(peso, altura):
+    "calcula el índice de masa corporal (IMC) dado el peso en kg y la altura en metros"
+    imc= peso / (altura ** 2)
+    return imc
+peso_kg= float(input("ingresa tu peso en kilogramos: "))
+altura_m= float(input("ingresa tu altura en metros: "))
+imc_resultado= calcular_imc(peso_kg, altura_m)
+print(f"tu índice de masa corporal (IMC) es: {imc_resultado}")
+
+#actividad9
+def celcius_a_fahrenheit(celsius):
+    "convierte grados Celsius a Fahrenheit"
+    fahrenheit= (celsius * 9/5) + 32
+    return fahrenheit
+temperatura_celsius= float(input("ingresa la temperatura en grados Celsius: "))
+temperatura_fahrenheit= celcius_a_fahrenheit(temperatura_celsius)
+print(f"{temperatura_celsius}°C son {temperatura_fahrenheit}°F")
+
+#actividad10
+def calcular_promedio(a,b,c):
+    "calcula el promedio de tres números"
+    promedio= (a + b + c) / 3
+    return promedio
+num_a= float(input("ingresa el primer número: "))
+num_b= float(input("ingresa el segundo número: "))
+num_c= float(input("ingresa el tercer número: "))
+promedio_resultado= calcular_promedio(num_a, num_b, num_c)
+print(f"el promedio de {num_a}, {num_b} y {num_c} es: {promedio_resultado}")
