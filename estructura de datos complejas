@@ -1,0 +1,282 @@
+#ejercicio1
+precios_frutas= {"banana": 1200, "anana": 2500, "melon": 3500, "uva": 1450}
+print( f"diccionario inicial: {precios_frutas}" )
+print("-" * 30)
+
+precios_frutas["naranja"]= 1200
+precios_frutas["manzana"]= 1500
+precios_frutas["pera"]=2300
+print( f"diccionario con nuevas frutas: {precios_frutas}" )
+print("-" * 30)
+
+#ejercicio2
+precios_frutas["banana"]= 1350
+precios_frutas["manzana"]= 1700
+precios_frutas["melon"]= 2800
+print( f"diccionario con precios actualizados: {precios_frutas}" )
+print("-" * 30)
+
+#ejercicio3
+lista_frutas= list(precios_frutas.keys())
+print(f"lista de frutas disponibles (lista de frutas): {lista_frutas}")
+print("-" * 30)
+
+#ejercicio4
+def programa_contactos():
+    "permite al usuario agregar 5 contactos a una agenda y mostrarlos"
+    print("-----carga de 5 contactos-----")
+    for i in range(5):
+        nombre= input("ingresa el nombre del contacto {i+1}: ")
+        numero= input("ingresa el numero del contacto para {nombre}: ")
+        contactos=[nombre]= numero
+        print(f"contacto {nombre} agregado.")
+    print("-----lista de contactos-----")
+    nombre_a_consultar= input("ingresa el nombre del contacto que deseas consultar: ")
+    if nombre_a_consultar in contactos:
+        numero_encontrado= contactos[nombre_a_consultar]
+        print(f"el número de {nombre_a_consultar} es: {numero_encontrado}")
+    else:
+        print(f"el contacto {nombre_a_consultar} no se encuentra en la agenda.")
+
+#ejercicio5
+def analizar_frase():
+    """Solicita una frase al usuario y calcula palabras únicas y su frecuencia."""
+    
+    print("--- 📊 Análisis de Frase ---")
+    # Paso 1: Solicitar la frase al usuario
+    frase_entrada = input("Ingrese una frase: ")
+    
+    # Limpiar y dividir la frase en una lista de palabras
+    # Convertimos a minúsculas y eliminamos signos de puntuación simples
+    palabras = frase_entrada.lower().replace('.', '').replace(',', '').split()
+    
+    # --- Resultado 1: Palabras únicas (usando un set) ---
+    # Un set elimina automáticamente los duplicados
+    palabras_unicas = set(palabras)
+    
+    print("\nPalabras Únicas (Set):")
+    print(f"Únicas: {palabras_unicas}")
+    
+    # --- Resultado 2: Conteo de palabras (usando un diccionario) ---
+    # Opción 1 (Manual - Fundamental para el TP):
+    recuento_manual = {}
+    for palabra in palabras:
+        # Si la palabra ya está, sumamos 1; si no, la inicializamos en 1
+        recuento_manual[palabra] = recuento_manual.get(palabra, 0) + 1
+        
+    print("\nRecuento (Diccionario Manual):")
+    print(f"Recuento: {recuento_manual}")
+
+    # Opción 2 (Con Counter - Más pythonic):
+    # recuento_counter = Counter(palabras)
+    # print("\nRecuento (Diccionario con Counter):")
+    # print(f"Recuento: {dict(recuento_counter)}")
+
+# Ejecutar el programa
+# analizar_frase()
+
+#ejercicio6
+def calcular_promedios_alumnos():
+    """Permite ingresar nombres y 3 notas para calcular el promedio."""
+    
+    # El diccionario para almacenar los datos (nombre: (nota1, nota2, nota3))
+    alumnos = {}
+    
+    print("--- Ingreso de Notas de 3 Alumnos ---")
+    
+    # Pedir los datos para 3 alumnos
+    for i in range(3):
+        nombre = input(f"Ingrese el nombre del alumno {i+1}: ")
+        
+        try:
+            # Pedir las 3 notas como cadena y convertir a tupla de enteros
+            notas_str = input(f"Ingrese 3 notas para {nombre} separadas por coma (ej: 8,9,10): ")
+            # Convertir la cadena de notas a una tupla de enteros
+            notas = tuple(map(int, notas_str.split(',')))
+            
+            if len(notas) != 3:
+                print("Error: Debe ingresar exactamente 3 notas. Intente de nuevo.")
+                continue # Saltar al siguiente alumno si hay error en la cantidad de notas
+                
+            alumnos[nombre] = notas
+            
+        except ValueError:
+            print("Error: Asegúrese de ingresar números válidos separados por coma.")
+            continue
+            
+    print("\n--- Promedios de los Alumnos ---")
+    
+    # Recorrer el diccionario y calcular el promedio
+    for nombre, notas in alumnos.items():
+        # Sumar los elementos de la tupla y dividir por el número de elementos
+        promedio = sum(notas) / len(notas)
+        # Mostrar el promedio con dos decimales
+        print(f"El promedio de *{nombre}* ({notas}) es: *{promedio:.2f}*")
+
+# Ejecutar el programa
+calcular_promedios_alumnos()
+
+
+#ejercicio7
+def analizar_aprobados():
+    """Realiza operaciones de conjuntos para analizar los estudiantes que aprobaron Parcial 1 y Parcial 2."""
+    
+    # Definición de los sets de estudiantes que aprobaron cada parcial
+    parcial_1 = {'Juan', 'Ana', 'Luis', 'Sofía', 'Pedro'}
+    parcial_2 = {'Ana', 'Pedro', 'Carlos', 'Sofía', 'Martín'}
+
+    print("--- 📊 Análisis de Aprobados (Sets) ---")
+    print(f"Aprobaron Parcial 1: {parcial_1}")
+    print(f"Aprobaron Parcial 2: {parcial_2}")
+    
+    # 1. Mostrar los que aprobaron ambos parciales (INTERSECCIÓN)
+    # Usamos la operación de intersección (&)
+    ambos_parciales = parcial_1.intersection(parcial_2) # o parcial_1 & parcial_2
+    print("\n1. Aprobaron *ambos parciales* (Intersección):")
+    print(f"Resultado: {ambos_parciales}")
+    
+    # 2. Mostrar los que aprobaron solo uno de los dos (DIFERENCIA SIMÉTRICA)
+    # La diferencia simétrica (^) incluye los elementos que están en A o en B, pero no en ambos.
+    solo_uno = parcial_1.symmetric_difference(parcial_2) # o parcial_1 ^ parcial_2
+    print("\n2. Aprobaron *solo uno de los dos* (Diferencia Simétrica):")
+    print(f"Resultado: {solo_uno}")
+    
+    # 3. Mostrar la lista total de estudiantes que aprobaron al menos un parcial (UNIÓN)
+    # La unión (|) combina todos los elementos de ambos sets, eliminando duplicados.
+    al_menos_uno = parcial_1.union(parcial_2) # o parcial_1 | parcial_2
+    print("\n3. Aprobaron *al menos un parcial* (Unión - Sin repetir):")
+    print(f"Resultado: {al_menos_uno}")
+    
+    # Convertir el set a lista para cumplir con el requisito de "Mostrar la lista total"
+    lista_al_menos_uno = list(al_menos_uno)
+    print(f"Lista Total de Aprobados: {lista_al_menos_uno}")
+
+# Ejecutar el programa
+analizar_aprobados()
+
+#ejercicio8
+def gestionar_inventario():
+    """Permite consultar, agregar y actualizar el stock de productos."""
+    
+    # Inicializar el diccionario de inventario
+    inventario = {
+        'Monitor': 15,
+        'Teclado': 50,
+        'Mouse': 25
+    }
+    
+    print("--- 🛒 Gestión de Inventario ---")
+    
+    while True:
+        print("\nOpciones:")
+        print("1. Consultar stock")
+        print("2. Agregar/Actualizar stock")
+        print("3. Salir")
+        
+        opcion = input("Ingrese el número de la opción deseada: ")
+        
+        if opcion == '1':
+            # Consultar el stock de un producto ingresado
+            producto = input("Ingrese el nombre del producto a consultar: ")
+            
+            stock = inventario.get(producto, None)
+            
+            if stock is not None:
+                print(f"El stock actual de *{producto}* es: *{stock}*")
+            else:
+                print(f"El producto '{producto}' no existe en el inventario.")
+                
+        elif opcion == '2':
+            # Agregar o actualizar unidades
+            producto = input("Ingrese el nombre del producto: ")
+            
+            try:
+                unidades = int(input("Ingrese la cantidad de unidades a agregar (puede ser negativo para restar): "))
+            except ValueError:
+                print("Cantidad inválida. Intente de nuevo.")
+                continue
+                
+            if producto in inventario:
+                # Si existe, actualiza el stock
+                inventario[producto] += unidades
+                print(f"Stock de '{producto}' actualizado. Nuevo stock: {inventario[producto]}")
+            else:
+                # Si no existe, agrega el nuevo producto
+                inventario[producto] = unidades
+                print(f"Producto '{producto}' agregado con stock inicial: {unidades}")
+                
+        elif opcion == '3':
+            print("Saliendo de la gestión de inventario. Inventario final:", inventario)
+            break
+            
+        else:
+            print("Opción no válida. Intente con 1, 2 o 3.")
+
+# Ejecutar el programa
+gestionar_inventario()
+
+#ejercicio9
+def consultar_agenda():
+    """Permite consultar un evento usando una tupla (día, hora) como clave."""
+    
+    # El diccionario de la agenda, usando tuplas (día, hora) como claves
+    agenda = {
+        ("lunes", "10:00"): "Reunión de equipo",
+        ("martes", "15:00"): "Clase de inglés",
+        ("miércoles", "09:30"): "Entrenamiento",
+        ("viernes", "11:00"): "Entrega de proyecto"
+    }
+    
+    print("--- 📅 Consulta de Agenda ---")
+    print("Claves disponibles (ej: lunes, 10:00).")
+    
+    # 1. Solicitar día y hora al usuario
+    dia_consulta = input("Ingrese el día (ej: lunes): ").lower()
+    hora_consulta = input("Ingrese la hora (ej: 10:00): ")
+    
+    # 2. Crear la tupla clave para la consulta
+    clave_busqueda = (dia_consulta, hora_consulta)
+    
+    # 3. Consultar la actividad
+    # Usamos .get() para obtener el valor o un mensaje si no se encuentra
+    actividad = agenda.get(clave_busqueda, "No hay actividad programada para esta hora.")
+    
+    print("\n--- Resultado ---")
+    if actividad != "No hay actividad programada para esta hora.":
+        print(f"El evento programado para el *{dia_consulta.capitalize()} a las {hora_consulta}* es: *{actividad}*")
+    else:
+        print(f"No hay evento en {dia_consulta.capitalize()} a las {hora_consulta}.")
+
+# Ejecutar el programa
+consultar_agenda()
+
+#ejercicio10
+def invertir_diccionario_paises():
+    """Invierte un diccionario de (País: Capital) a (Capital: País)."""
+    
+    # Diccionario original (País: Capital)
+    original = {
+        "Argentina": "Buenos Aires", 
+        "Chile": "Santiago", 
+        "Uruguay": "Montevideo", 
+        "Perú": "Lima"
+    }
+    
+    # Nuevo diccionario que almacenará el resultado (Capital: País)
+    invertido = {}
+    
+    # Recorrer el diccionario original. En cada iteración:
+    # 'pais' toma el valor de la clave (ej: "Argentina")
+    # 'capital' toma el valor asociado (ej: "Buenos Aires")
+    for pais, capital in original.items():
+        # Asignar al nuevo diccionario invirtiendo la posición:
+        # La 'capital' se convierte en la nueva clave, y el 'pais' en el nuevo valor.
+        invertido[capital] = pais
+        
+    print("--- 🌍 Inversión de Diccionario ---")
+    print(f"Diccionario Original: {original}")
+    print("-" * 30)
+    print(f"Diccionario Invertido: {invertido}")
+
+# Ejecutar el programa
+invertir_diccionario_paises()
